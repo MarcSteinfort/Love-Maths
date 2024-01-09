@@ -12,6 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     }
 
+    document.getElementById("answer-box").addEventListener("keydown", function(Event) {
+        if (Event.key === "Enter") {
+            checkAnswer();
+        }
+    })
+
     runGame("addition");
 })
 
@@ -21,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 function runGame(gameType) {
 
+    document.getElementById("answer-box").value="";
+    document.getElementById("answer-box").focus();
     // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
@@ -30,6 +38,8 @@ function runGame(gameType) {
     } else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
     } else if (gameType === "substract") {
+        displaySubstractQuestion(num1, num2);
+    } else if (gameType === "divide") {
         displaySubstractQuestion(num1, num2);
     } else {
         alert(`Unkonwn game type: ${gameType}`);
@@ -74,6 +84,8 @@ function calculateCorrectAnswer() {
         return [operand1 * operand2, "multiply"];
     } else if (operator === "-") {
         return [operand1 - operand2, "substract"]
+    } else if (operator === "/") {
+        return [operand1 - operand2, "divide"]
     } else {
         alert(`Unimplented operator ${operator}`);
         throw `Unkown game type:${gameType}. Aborting!`;
